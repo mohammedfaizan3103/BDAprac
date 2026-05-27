@@ -1,0 +1,67 @@
+SPARK STRUCTURED STREAMING LAB INSTRUCTIONS
+
+Experiment 1: Tumbling Window + Watermark
+----------------------------------------
+1. Go to project folder:
+   cd spark_retail_package
+
+2. Create streaming folder:
+   mkdir retail_stream
+
+3. Run program:
+   spark-submit tumbling_window.py
+
+4. In another terminal, stream files:
+   for file in retail_30_days/*.csv
+   do
+       cp "$file" retail_stream/
+       sleep 2
+   done
+
+Observation:
+- Each record belongs to ONE window
+- No overlap between windows
+
+
+Experiment 2: Sliding Window + Watermark
+----------------------------------------
+1. Run program:
+   spark-submit sliding_window.py
+
+2. Stream files (same as above)
+
+Observation:
+- Records appear in MULTIPLE windows
+- Overlapping results
+
+
+Important Notes:
+----------------
+- Always start Spark BEFORE copying files
+- Use correct folder structure:
+  spark_retail_package/
+    retail_30_days/
+    retail_stream/
+    tumbling_window.py
+    sliding_window.py
+
+- Timestamp format must be:
+  YYYY-MM-DD HH:MM
+
+Common Errors:
+--------------
+1. No output:
+   -> Files copied before Spark start
+
+2. Path error:
+   -> Use absolute path
+
+3. Empty results:
+   -> Check timestamp parsing
+
+Learning Outcomes:
+------------------
+- Understand Structured Streaming
+- Difference between Tumbling vs Sliding window
+- Concept of Watermarking
+- Real-time data processing
