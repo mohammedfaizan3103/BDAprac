@@ -1,0 +1,17 @@
+# 1. Create a simple text file
+echo "apple banana apple cherry banana apple" > input.txt
+
+# 2. Create a directory in HDFS for the input
+hadoop fs -mkdir -p /user/pig/wordcount/input
+
+# 3. Upload the file to HDFS
+hadoop fs -put input.txt /user/pig/wordcount/input/
+
+pig -x mapreduce wordcount.pig
+
+
+# List the output directory
+hadoop fs -ls /user/pig/wordcount/output
+
+# View the content of the result file
+hadoop fs -cat /user/pig/wordcount/output/part*

@@ -1,0 +1,9 @@
+/usr/local/spark/bin/spark-submit \
+--master spark://172.16.7.213:7077 \
+fraud_detection.py
+
+
+
+
+
+http://172.16.7.213:4040

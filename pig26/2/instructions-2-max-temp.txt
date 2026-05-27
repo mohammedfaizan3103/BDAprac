@@ -1,0 +1,15 @@
+# 1. Create a dummy NCDC sample file (Year 1950, Temp 22.2C and 25.0C)
+echo "0067011990999991950051507004...9999999N9+02221+99999999999" > ncdc_data.txt
+echo "0067011990999991950051512004...9999999N9+02501+99999999999" >> ncdc_data.txt
+echo "0067011990999991951051507004...9999999N9+03111+99999999999" >> ncdc_data.txt
+
+# 2. Upload to HDFS
+hdfs dfs -mkdir -p /user/pig/ncdc/input
+hdfs dfs -put ncdc_data.txt /user/pig/ncdc/input/
+
+
+# Clean previous output if it exists
+hdfs dfs -rm -r /user/pig/ncdc/output
+
+# Run the script
+pig -x mapreduce max_temp.pig

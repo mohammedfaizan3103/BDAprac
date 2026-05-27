@@ -1,0 +1,8 @@
+hadoop fs -mkdir /NCDCWeatherData
+
+hadoop fs -copyFromLocal NCDCWeatherData/*  /NCDCWeatherData
+
+
+
+hadoop jar /home/hduser/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar -file temp-mapper.py  -mapper temp-mapper.py  -file temp-reducer.py -reducer temp-reducer.py -input /NCDCWeatherData -output /weatherout
+

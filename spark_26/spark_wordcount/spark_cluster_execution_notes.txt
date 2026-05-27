@@ -1,0 +1,109 @@
+SPARK CLUSTER EXECUTION DOCUMENTATION
+
+Environment Overview
+
+Master Node: Hostname: admin38-Vostro-3020-SFF IP Address: 172.16.4.183
+OS: Ubuntu 20.04 Spark Version: 3.5.1
+
+Worker Node: IP Address: 172.16.5.185 OS: Ubuntu 22.04
+
+Both machines are connected through SSH with passwordless login.
+
+Spark Cluster Architecture
+
+Master: 172.16.4.183 Worker: 172.16.5.185
+
+Master manages scheduling and resource allocation. Worker executes
+distributed tasks.
+
+Python Configuration Fix
+
+There was a Python version mismatch.
+
+Master Python: /usr/bin/python3 -> Python 3.8
+
+Worker Python: /usr/bin/python3 -> Python 3.10
+
+Solution used during execution:
+
+Driver Python: /home/hduser/.pyenv/shims/python3
+
+Worker Python: /usr/bin/python3
+
+Spark Execution Command
+
+PYSPARK_DRIVER_PYTHON=/home/hduser/.pyenv/shims/python3
+PYSPARK_PYTHON=/usr/bin/python3
+/usr/local/spark/bin/spark-submit
+–conf spark.pyspark.driver.python=/home/hduser/.pyenv/shims/python3
+–conf spark.pyspark.python=/usr/bin/python3
+–master spark://172.16.4.183:7077
+/usr/local/spark/examples/src/main/python/pi.py 100
+
+Explanation of Command
+
+spark-submit : Submits application to Spark cluster –master : Specifies
+Spark master node pi.py : Example distributed program computing value of
+PI 100 : Number of partitions/tasks
+
+Execution Behavior
+
+Spark divides the job into 100 tasks.
+
+Example logs:
+
+Starting task … (172.16.5.185, executor 0) Finished task … on
+172.16.5.185
+
+This confirms: - Tasks executed on worker node - Distributed computing
+working - Spark cluster functioning correctly
+
+Final Output
+
+Pi is roughly 3.133920
+
+Spark Web UI
+
+Cluster monitoring interface:
+
+http://172.16.4.183:8080
+
+Displays: - Worker nodes - CPU cores - Memory usage - Running
+applications - Task execution details
+
+Conclusion
+
+Spark cluster successfully configured and executed distributed tasks
+across multiple machines.
+
+
+
+
+/usr/local/spark/sbin/start-worker.sh spark://172.16.4.183:7077
+
+
+
+
+The environment is stable and should not be modified before
+demonstration in class.
+
+
+scp input.txt hduser@172.16.5.185:/home/hduser/spark-26/spark_wordcount/
+
+
+PYSPARK_DRIVER_PYTHON=/usr/bin/python3 \
+PYSPARK_PYTHON=/usr/bin/python3 \
+/usr/local/spark/bin/spark-submit \
+--master spark://172.16.4.183:7077 \
+wordcount.py
+
+
+
+
+
+
+PYSPARK_DRIVER_PYTHON=/usr/bin/python3 \
+PYSPARK_PYTHON=/usr/bin/python3 \
+/usr/local/spark/bin/spark-submit \
+--master spark://172.16.4.183:7077 \
+server_log.py

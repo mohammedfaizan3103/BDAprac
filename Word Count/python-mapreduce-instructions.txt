@@ -1,0 +1,10 @@
+
+touch word.txt
+hadoop fs -mkdir /wordcount-py
+hadoop fs -put wc.txt /wordcount-py
+
+hadoop jar /usr/local/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar -file mapper.py -mapper "python3 mapper.py" -file reducer.py -reducer "python3 reducer.py" -input /wordcount-py/wc.txt -output /wordcount-py/output
+
+
+
+hadoop fs -cat /wordcount/output/part-00000

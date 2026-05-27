@@ -1,0 +1,6 @@
+/usr/local/spark/bin/spark-submit \
+--master spark://172.16.4.183:7077 \
+news_clustering.py
+
+
+http://172.16.4.183:4040

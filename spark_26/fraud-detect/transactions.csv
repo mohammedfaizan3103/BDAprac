@@ -1,0 +1,11 @@
+amount,location,merchant,device,fraud
+120,India,Amazon,Mobile,0
+5000,USA,Apple,Laptop,0
+50,India,Flipkart,Mobile,0
+20000,Nigeria,Unknown,Mobile,1
+15000,Nigeria,Unknown,Tablet,1
+80,India,Swiggy,Mobile,0
+30000,Russia,Unknown,Laptop,1
+60,India,Amazon,Mobile,0
+25000,Russia,Unknown,Mobile,1
+90,India,Zomato,Mobile,0
